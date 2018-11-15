@@ -11,9 +11,10 @@
 #' mejr_palette()
 mejr_palette <- function() {
   list(
-    black="#141214", gray="#939393", lightgray="#E8E8E8",
-    yellow="#E0CF7C", magenta="#E069C6", cyan="#60ADAB",
-    midline_color="#767698", fill="#8989B2", colour="#585872")
+    black="#141214", gray="#939393", lightgray="#E8E8E8", yellow="#E0CF7C",
+    magenta="#E069C6", cyan="#60ADAB", midline="#767698", fill="#8989B2",
+    colour="#585872"
+  )
 }
 
 #' Custom ggplot2 theme
@@ -64,25 +65,28 @@ theme_mejr <- function(base_size=11, base_family=getOption("ggdistribute.font"),
 
   theme(
     line=element_line(
-      colour=black, size=scale_add(base_size, 1 / 36),
-      linetype=1, lineend="butt"),
+      colour=black, size=scale_add(base_size, 1 / 36), linetype=1, lineend="butt"
+    ),
     rect=element_rect(
       fill="transparent", colour=black,
-      size=scale_add(base_size, 1 / 18), linetype=1),
+      size=scale_add(base_size, 1 / 18), linetype=1
+    ),
     text=element_text(
       family=base_family, face="plain", colour=black, size=base_size,
       hjust=0.5, vjust=0.5, angle=0, lineheight=1,
       margin=margin(
         t=scale_add(base_size, 0.45), r=scale_add(base_size, 0.45),
-        b=scale_add(base_size, 0.45),
-        l=scale_add(base_size, 0.45), unit="pt"), debug=debug
+        b=scale_add(base_size, 0.45), l=scale_add(base_size, 0.45),
+        unit="pt"
+      ), debug=debug
     ),
     title=element_text(
       family=base_family, face="plain", colour=black,
       size=scale_add(base_size, 1.1), hjust=0, vjust=0.5, angle=0, lineheight=0.9,
       margin=margin(
-        t=0, r=0, b=scale_add(base_size, 0.25, margin_add),
-        l=0, unit="pt"), debug=debug
+        t=0, r=0, b=scale_add(base_size, 0.25, margin_add), l=0, unit="pt"
+      ),
+      debug=debug
     ),
     axis.line=element_line(),
     axis.line.x=NULL,
@@ -96,65 +100,67 @@ theme_mejr <- function(base_size=11, base_family=getOption("ggdistribute.font"),
       hjust=0.5, vjust=1,
       margin=margin(
         t=scale_add(base_size, 0.25, margin_add),
-        r=scale_add(base_size, 0.25, margin_add),
-        b=scale_add(base_size, 0.125),
-        l=scale_add(base_size, 0.25, margin_add), unit="pt")
+        r=scale_add(base_size, 0.25, margin_add), b=scale_add(base_size, 0.125),
+        l=scale_add(base_size, 0.25, margin_add), unit="pt"
+      )
     ),
     axis.text.x.top=element_text(
       vjust=0, margin=margin(
         t=scale_add(base_size, 0.125),
         r=scale_add(base_size, 0.25, margin_add),
         b=scale_add(base_size, 0.25, margin_add),
-        l=scale_add(base_size, 0.25, margin_add), unit="pt")
+        l=scale_add(base_size, 0.25, margin_add), unit="pt"
+      )
     ),
-    axis.text.y=element_text(
-      hjust=1, margin=margin(
-        t=scale_add(base_size, 0.25, margin_add),
-        r=scale_add(base_size, 0.25, margin_add),
-        b=scale_add(base_size, 0.25, margin_add),
-        l=scale_add(base_size, 0.125), unit="pt")
-    ),
+    axis.text.y=element_text(hjust=1, margin=margin(
+      t=scale_add(base_size, 0.25, margin_add),
+      r=scale_add(base_size, 0.25, margin_add),
+      b=scale_add(base_size, 0.25, margin_add),
+      l=scale_add(base_size, 0.125), unit="pt"
+    )),
     axis.text.y.right=element_text(
       hjust=0, margin=margin(
         t=scale_add(base_size, 0.25, margin_add),
         r=scale_add(base_size, 0.125),
         b=scale_add(base_size, 0.25, margin_add),
-        l=scale_add(base_size, 0.25, margin_add), unit="pt")
+        l=scale_add(base_size, 0.25, margin_add), unit="pt"
+      )
     ),
     axis.title=element_text(face="bold", size=rel(0.875)),
     axis.title.x=element_text(
       vjust=0.5, hjust=0.5,
       margin=margin(
-        t=scale_add(base_size, 0.4, margin_add / 2),
-        r=scale_add(base_size, 0), b=scale_add(base_size, 0),
-        l=scale_add(base_size, 0), unit="pt")
+        t=scale_add(base_size, 0.4, margin_add / 2), r=scale_add(base_size, 0),
+        b=scale_add(base_size, 0), l=scale_add(base_size, 0), unit="pt"
+      )
     ),
     axis.title.x.top=element_text(
       margin=margin(
         t=scale_add(base_size, 0), r=scale_add(base_size, 0),
         b=scale_add(base_size, 0.4, margin_add / 2),
-        l=scale_add(base_size, 0), unit="pt")
+        l=scale_add(base_size, 0), unit="pt"
+      )
     ),
     axis.title.y=element_text(
-      angle=90, vjust=0.5,
-      hjust=0, margin=margin(
-        t=scale_add(base_size, 0),
-        r=scale_add(base_size, 0.4, margin_add / 2),
-        b=scale_add(base_size, 0),
-        l=scale_add(base_size, 0), unit="pt")
+      angle=90, vjust=0.5, hjust=0,
+      margin=margin(
+        t=scale_add(base_size, 0), r=scale_add(base_size, 0.4, margin_add / 2),
+        b=scale_add(base_size, 0), l=scale_add(base_size, 0), unit="pt"
+      )
     ),
     axis.title.y.right=element_text(
       hjust=1, vjust=0.5, angle=270,
       margin=margin(
         t=scale_add(base_size, 0), r=scale_add(base_size, 0),
         b=scale_add(base_size, 0),
-        l=scale_add(base_size, 0.4, margin_add / 2), unit="pt")
+        l=scale_add(base_size, 0.4, margin_add / 2), unit="pt"
+      )
     ),
     legend.background=element_blank(),
     legend.key=element_blank(),
     legend.key.size=grid::unit(scale_add(base_size, 1.25), "pt"),
-    legend.key.height=grid::unit(scale_add(base_size, 0.8), "pt"),
-    legend.key.width=grid::unit(scale_add(base_size, 1.25), "pt"),
+    legend.key.height=NULL,
+    legend.key.width=NULL,
     legend.text=element_text(size=rel(0.5)),
     legend.text.align=0.5,
     legend.title=element_text(face="plain", size=rel(0.7)),
@@ -198,15 +204,15 @@ theme_mejr <- function(base_size=11, base_family=getOption("ggdistribute.font"),
       hjust=0.5, vjust=0.5,
       margin=margin(
         t=scale_add(base_size, 0.25), r=scale_add(base_size, 0.125),
-        b=scale_add(base_size, 0.25),
-        l=scale_add(base_size, 0.125), unit="pt")
+        b=scale_add(base_size, 0.25), l=scale_add(base_size, 0.125), unit="pt"
+      )
     ),
     strip.text.y=element_text(
       vjust=0.5, hjust=0.5, angle=270,
       margin=margin(
         t=scale_add(base_size, 0.125), r=scale_add(base_size, 0.25),
-        b=scale_add(base_size, 0.125),
-        l=scale_add(base_size, 0.25), unit="pt")
+        b=scale_add(base_size, 0.125), l=scale_add(base_size, 0.25), unit="pt"
+      )
     ),
     strip.placement="outside",
     strip.placement.x=NULL,
@@ -219,7 +225,8 @@ theme_mejr <- function(base_size=11, base_family=getOption("ggdistribute.font"),
       margin=margin(
         t=scale_add(base_size, 0), r=scale_add(base_size, 0),
         b=scale_add(base_size, 1 / 3, margin_add / 1.5),
-        l=scale_add(base_size, 0), unit="pt")
+        l=scale_add(base_size, 0), unit="pt"
+      )
     ),
     plot.tag=element_text(face="bold"),
     plot.tag.position="topleft",
@@ -228,14 +235,15 @@ theme_mejr <- function(base_size=11, base_family=getOption("ggdistribute.font"),
       margin=margin(
         t=scale_add(base_size, 0), r=scale_add(base_size, 0),
         b=scale_add(base_size, 1 / 3, margin_add),
-        l=scale_add(base_size, 0), unit="pt")
+        l=scale_add(base_size, 0), unit="pt"
+      )
     ),
     plot.caption=element_text(
       hjust=0.5, size=rel(0.75), face="italic",
       margin=margin(
-        t=scale_add(base_size, 0.5, margin_add),
-        r=scale_add(base_size, 0.75), b=scale_add(base_size, 0.125),
-        l=scale_add(base_size, 0.75), unit="pt")
+        t=scale_add(base_size, 0.5, margin_add), r=scale_add(base_size, 0.75),
+        b=scale_add(base_size, 0.125), l=scale_add(base_size, 0.75), unit="pt"
+      )
     ),
     plot.margin=margin(
       t=scale_add(base_size, 1 / 7), r=scale_add(base_size, 1 / 7),
@@ -268,26 +276,31 @@ theme_mejr <- function(base_size=11, base_family=getOption("ggdistribute.font"),
 #'
 #' # Reset defaults back to their original state.
 #' mejr_geom_defaults(reset=TRUE)
-mejr_geom_defaults <- function(base_size=11, black=51, gray=214, lty=3,
-                               lwd=base_size / 20, cex=base_size / 9,
-                               stroke=base_size * .05, alpha=0.5, pch=21,
-                               txt=base_size / 4, reset=FALSE) {
+mejr_geom_defaults <- function(base_size=11, black=51, gray=214, lty=3, lwd=base_size /
+                                 20,
+                               cex=base_size / 9, stroke=base_size * .05, alpha=0.5,
+                               pch=21, txt=base_size / 4, reset=FALSE) {
   gray <- gray2(gray)
   black <- gray2(black)
 
   updates <- list(
     text=list(geoms="text", opts=list(size=txt, colour=black)),
     lines=list(geoms=c(
-      "line", "hline", "vline", "linerange",
-      "errorbar", "errorbarh"), opts=list(size=lwd, colour=black)),
+      "line", "hline", "vline", "linerange", "errorbar",
+      "errorbarh"
+    ), opts=list(size=lwd, colour=black)),
     ablines=list(
       geoms=c("hline", "vline", "abline"),
-      opts=list(size=lwd, colour=gray, linetype=lty)),
+      opts=list(size=lwd, colour=gray, linetype=lty)
+    ),
     bar=list(geoms="bar", opts=list(size=lwd, colour=NA)),
-    smooth=list(geoms="smooth", opts=list(size=lwd, colour=black, fill=gray)),
+    smooth=list(geoms="smooth", opts=list(
+      size=lwd, colour=black, fill=gray
+    )),
     point=list(geoms="point", opts=list(
       size=cex, colour=black, shape=pch,
-      stroke=stroke, fill=NA, alpha=alpha))
+      stroke=stroke, fill=NA, alpha=alpha
+    ))
   )
 
   gg_defaults <- getOption("ggdistribute.geom.defaults")
@@ -347,8 +360,8 @@ geom_defaults <- function(geom) {
 #' @param with_test_theme also print the same plot using `ggplot2::theme_test`
 #' @param dir directory where to save temp pdf files, such as tempdir()
 #' @return NULL
-test_mejr_theme <- function(w=6.875, h=4.5, eplot=list(), mejr=list(),
-                            gg=theme(), print=TRUE, with_test_theme=FALSE, dir) {
+test_mejr_theme <- function(w=6.875, h=4.5, eplot=list(), mejr=list(), gg=theme(),
+                            print=TRUE, with_test_theme=FALSE, dir) {
   if (length(eplot) < 1) {
     eplot <- list()
   }
@@ -362,8 +375,7 @@ test_mejr_theme <- function(w=6.875, h=4.5, eplot=list(), mejr=list(),
   if (with_test_theme) {
     test_theme_args <- list(base_size=11, debug=FALSE)
     test_theme_args <- modifyList(
-      test_theme_args,
-      Filter(Negate(is.null), mejr[c("base_size", "debug")]),
+      test_theme_args, Filter(Negate(is.null), mejr[c("base_size", "debug")]),
       keep.null=TRUE
     )
 
@@ -372,8 +384,9 @@ test_mejr_theme <- function(w=6.875, h=4.5, eplot=list(), mejr=list(),
 
     ggsave(
       filename=normalizePath(file.path(dir, "theme_test.pdf"), mustWork=F),
-      example_plot() + do.call("theme_test", test_theme_args) + gg,
-      width=w, height=h, device="pdf")
+      example_plot() + do.call("theme_test", test_theme_args) + gg, width=w,
+      height=h, device="pdf"
+    )
   }
 
   theme_set(theme_mejr())
@@ -383,11 +396,13 @@ test_mejr_theme <- function(w=6.875, h=4.5, eplot=list(), mejr=list(),
 
   ggsave(
     filename=normalizePath(file.path(dir, "theme_mejr1.pdf"), mustWork=FALSE),
-    p_mejr1, width=w, height=h, device="pdf")
+    p_mejr1, width=w, height=h, device="pdf"
+  )
 
   ggsave(
     filename=normalizePath(file.path(dir, "theme_mejr2.pdf"), mustWork=FALSE),
-    p_mejr2, width=w, height=h, device="pdf")
+    p_mejr2, width=w, height=h, device="pdf"
+  )
 
   if (print) {
     grid::grid.draw(p_mejr2)
@@ -418,36 +433,28 @@ annotate_corner <- function(text, pos="tl", geom=c("text", "label"), ...) {
   h <- 0
   v <- 1
 
-  switch(tolower(pos),
-    topleft= ,
-    tl={
-      x <- -Inf
-      y <- Inf
-      h <- 0
-      v <- 1
-    },
-    topright= ,
-    tr={
-      x <- Inf
-      y <- Inf
-      h <- 1
-      v <- 1
-    },
-    bottomleft= ,
-    bl={
-      x <- -Inf
-      y <- -Inf
-      h <- 0
-      v <- 0
-    },
-    bottomright= ,
-    br={
-      x <- Inf
-      y <- -Inf
-      h <- 1
-      v <- 0
-    },
-    stop("incorrect position"))
+  switch(tolower(pos), topleft= , tl={
+    x <- -Inf
+    y <- Inf
+    h <- 0
+    v <- 1
+  }, topright= , tr={
+    x <- Inf
+    y <- Inf
+    h <- 1
+    v <- 1
+  }, bottomleft= , bl={
+    x <- -Inf
+    y <- -Inf
+    h <- 0
+    v <- 0
+  }, bottomright= ,
+  br={
+    x <- Inf
+    y <- -Inf
+    h <- 1
+    v <- 0
+  }, stop("incorrect position"))
 
   annotate(match.arg(geom), x, y, label=text, hjust=h, vjust=v, ...)
 }
@@ -479,7 +486,8 @@ label_plot <- function(labels, x, y, g=list(fontsize=14, fontface="bold"), ...) 
   }
   for (i in seq_len(l)) {
     grid::grid.text(
-      label=labels[i], x=unit(x[i], "npc"),
-      y=unit(y[i], "npc"), gp=do.call(grid::gpar, g), ...)
+      label=labels[i], x=unit(x[i], "npc"), y=unit(y[i], "npc"),
+      gp=do.call(grid::gpar, g), ...
+    )
   }
 }

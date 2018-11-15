@@ -25,29 +25,26 @@ position_spread <- function(height=NULL, reverse=FALSE, padding=0.2) {
 # ggproto object ----------------------------------------------------------
 
 PositionSpread <- ggproto(
-  "PositionSpread",
-  Position,
-  required_aes="y",
-  height=NULL,
-  reverse=FALSE,
+  "PositionSpread", Position,
+  required_aes="y", height=NULL, reverse=FALSE,
   padding=0.2,
-
   setup_params=function(self, data) {
-    height_pars <- standardize_height_param(data, self$height %NA% "single")
+    height_pars <- standardize_height_param(data, self$height %NA%
+      "single")
 
     list(
       height=height_pars$heights, custom=height_pars$custom,
-      padding=self$padding %NA% 0, reverse=self$reverse %NA% FALSE)
+      padding=self$padding %NA% 0, reverse=self$reverse %NA% FALSE
+    )
   },
 
   compute_panel=function(data, params, scales) {
     as_dtbl(data) %>%
-      transform_heights(
-        heights=params$height,
-        padding=params$padding) %>%
+      transform_heights(heights=params$height, padding=params$padding) %>%
       spread_by_ymin(
         spreader=shrink_and_stack, reverse=params$reverse,
-        padding=params$padding) %>%
+        padding=params$padding
+      ) %>%
       rescale_overlapping(scales=scales, skip=params$custom) %>%
       set_col_order(c("PANEL", "group", "x", "y") %Names% data) %>%
       as.data.frame()
@@ -78,9 +75,7 @@ standardize_height_param <- function(data, height) {
 
       # check if only one group per panel
       lonely_groups <- dt[] %>%
-        set_range_data("y",
-          by=c("group", "PANEL"),
-          force_cols=TRUE, copy=FALSE) %>%
+        set_range_data("y", by=c("group", "PANEL"), force_cols=TRUE, copy=FALSE) %>%
         .[, .(.__n=length(unique(.__min))), PANEL] %>%
         .[, all(.__n == 1)]
 
@@ -95,8 +90,7 @@ standardize_height_param <- function(data, height) {
           # order by min and use only these variables
           .[order(.__min), .(PANEL, group, .__min, .__max, .__len)] %>%
           # unique data
-          unique() %>%
-          # group by common y min values
+          unique() %>% # group by common y min values
           .[, .__grp := .GRP, .(.__min)] %>%
           # space in between y groups (from min y to next groups min y)
           .[, space := unique_apply(.__min, .__grp, append_diff)] %>%
@@ -114,19 +108,16 @@ standardize_height_param <- function(data, height) {
       }
 
       ht
-    },
-    num={
+    }, num={
       n_user_heights <- length(height)
       if (n_user_heights != 1 && n_user_heights != n_heights) {
-        warning("Height length was size ", n_user_heights, " but ",
-          n_heights, " heights are required. ",
-          "Recycling heights if any are missing.",
+        warning("Height length was size ", n_user_heights, " but ", n_heights,
+          " heights are required. ", "Recycling heights if any are missing.",
           call.=FALSE)
       }
 
       rep_len(height, n_heights)
-    },
-    NULL
+    }, NULL
   )
 
   heights <- dt[, .(`.__ht`=heights[.GRP]), .(PANEL, group)]
@@ -136,7 +127,7 @@ standardize_height_param <- function(data, height) {
 
 height_char_groups <- function(height_str=c("total", "panel", "single")) {
   switch(tolower(match.arg(height_str)), total=NULL, panel="PANEL",
-  single=c("PANEL", "group"), NULL)
+    single=c("PANEL", "group"), NULL)
 }
 
 transform_heights <- function(data, heights, padding) {
@@ -155,9 +146,8 @@ spread_by_ymin <- function(data, spreader, ...) {
   # NOTE: also creates the variables ymin, ymax in data
   as_dtbl(data) %>%
     set_range_data("y",
-      by=c("PANEL", "group"),
-      force_cols=TRUE, names=c("ymin", "ymax"),
-      copy=FALSE) %>%
+      by=c("PANEL", "group"), force_cols=TRUE,
+      names=c("ymin", "ymax"), copy=FALSE) %>%
     .[, .__min := ymin] %>%
     .[, spreader(.SD, ...), .(.__min, PANEL)] %>%
     rm_temp_cols()
@@ -201,10 +191,8 @@ shrink_and_stack <- function(SD, reverse=FALSE, padding=0) {
 
   pad_adj <- 1 - (padding / max(1, n_groups - 2))
 
-  dt[] %>%
-    # total height of data
-    .[, .__len := diff(range_no_inf(y))] %>%
-    # each overlapping groups height
+  dt[] %>% # total height of data
+    .[, .__len := diff(range_no_inf(y))] %>% # each overlapping groups height
     .[, .__ht := ymax - ymin] %>%
     # group heights sum to total height
     .[, .__len := .__len * unique_simplex(.__ht, .__grp)] %>%
@@ -213,8 +201,7 @@ shrink_and_stack <- function(SD, reverse=FALSE, padding=0) {
     # reposition y by stacking based on group height values
     .[, .__tmp := unique_apply(.__y * (1 / pad_adj), .__grp, csum_left)] %>%
     .[, y := .__y + .__tmp + ymin] %>%
-    .[, `:=`(ymin=min(y), ymax=min(y) + .__len), .(.__grp)] %>%
-    # junk
+    .[, `:=`(ymin=min(y), ymax=min(y) + .__len), .(.__grp)] %>% # junk
     rm_temp_cols()
 }
 
